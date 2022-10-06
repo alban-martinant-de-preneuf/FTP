@@ -1,5 +1,7 @@
 IFS=$'\n'
 
+apt install sudo
+
 for line in $(cat Shell_Userlist.csv)
 do
     id=`echo $line | cut -d "," -f 1`
@@ -25,13 +27,9 @@ do
 
         if [ ${role:0:5} = "Admin" ]
         then
-            #Une ligne "%admin ALL=(ALL) ALL" est déjà présente dans /etc/sudoers
+            #Une ligne "%sudo ALL=(ALL) ALL" est déjà présente dans /etc/sudoers
             #Je m'en sers pour donner les droits super utilisateur
-            if [ $(cat /etc/group | grep ^admin: | wc -l) != 1 ]
-            then
-                groupadd admin
-            fi
-            usermod -a -G admin $userName
+            usermod -a -G sudo $userName
             usermod -d /home/$userName -s /bin/bash $userName
         fi    
     fi
