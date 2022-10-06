@@ -13,26 +13,26 @@ do
     if let $id 2>/dev/null
     then
         #sudo userdel -r $userName
-        useradd -m /ftpshare -c "$firstName $name" -u $id -s /bin/false $userName
+        useradd --home /ftpshare -c "$firstName $name" -u $id -s /bin/false $userName
         echo $userName:$pwd | chpasswd
-        if [ $(cat /etc/group | grep ^ftpgroup$ | wc -l) != 1 ]
+        if [ $(cat /etc/group | grep ^ftpgroup: | wc -l) != 1 ]
         #Seul les membres du groupes ftpgroup ont accès au serveur FTP (voir /etc/proftpd/con.d/perso.conf)
         then
             groupadd ftpgroup
         fi
-        usermod -aG ftpgroup $userName
+        usermod -a -G ftpgroup $userName
 
 
         if [ ${role:0:5} = "Admin" ]
         then
             #Une ligne "%admin ALL=(ALL) ALL" est déjà présente dans /etc/sudoers
             #Je m'en sers pour donner les droits super utilisateur
-            if [ $(cat /etc/group | grep ^admin$ | wc -l) != 1 ]
+            if [ $(cat /etc/group | grep ^admin: | wc -l) != 1 ]
             then
                 groupadd admin
             fi
-            usermod -aG admin $userName
-            usermod -d /home/$userName -s /bin/bash
+            usermod -a -G admin $userName
+            usermod -d /home/$userName -s /bin/bash $userName
         fi    
     fi
 done
