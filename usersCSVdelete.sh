@@ -1,3 +1,5 @@
+#!/bin/bash
+
 IFS=$'\n'
 
 for line in $(cat Shell_Userlist.csv)
