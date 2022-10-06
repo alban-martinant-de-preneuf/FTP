@@ -1,3 +1,5 @@
+#!/bin/bash
+
 IFS=$'\n'
 
 apt install sudo
@@ -30,6 +32,7 @@ do
             #Une ligne "%sudo ALL=(ALL) ALL" est déjà présente dans /etc/sudoers
             #Je m'en sers pour donner les droits super utilisateur
             usermod -a -G sudo $userName
+            mkdir /home/$userName
             usermod -d /home/$userName -s /bin/bash $userName
         fi    
     fi
