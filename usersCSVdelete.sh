@@ -15,5 +15,6 @@ do
     if let $id 2>/dev/null
     then
         sudo userdel -r $userName
+        rm -r /home/$userName
     fi
 done
