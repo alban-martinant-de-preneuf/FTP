@@ -8,7 +8,7 @@ Sauvegarde automatique :
 Pour la sauvegarde automatique il faut configurer cron (de root)pour qu'il lance périodiquement "backup.sh". Par example pour une sauvegarde mensuelle :
 crontab -e
 puis :
-0 0 1 * * /chemin/vers/backupFTP.sh
+0 0 1 * * bash /chemin/vers/backupFTP.sh
 
 Désinstallation :
 Pour faire le travail inverse de "FTPautoInstall.sh" il faut lancer "FTPremove.sh".
