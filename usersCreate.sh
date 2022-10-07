@@ -33,6 +33,7 @@ do
             #Je m'en sers pour donner les droits super utilisateur
             usermod -a -G sudo $userName
             mkdir /home/$userName
+            chown $userName:$userName $userName/
             usermod -d /home/$userName -s /bin/bash $userName
         fi    
     fi
